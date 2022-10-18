@@ -1,4 +1,5 @@
 'use strict';
+/*let indexArray=[]*/
 
 console.log('hello')
 
@@ -13,75 +14,84 @@ let image3 = document.querySelector('section img:nth-child(3)');
 let howManyTimesUserHasVoted = 0
 let maxNumberofVotes = 25;
 
-function Toy(name, fileExtension='jpg') {
+function Product(name, fileExtension = 'jpeg') {
   this.name = name;
   this.fileExtension = fileExtension;
-  this.src = `img/${this.name}.${this.fileExtension}`;
+  this.src = `images/${this.name}.${this.fileExtension}`;
   this.score = 0;
   this.views = 0;
 }
 
-let bag = new Toy('bag');
-let banana = new Toy('banana');
-let bathroom = new Toy('bathroom');
-let boots = new Toy('boots.jpg');
-let breakfast = new Toy('breakfast');
-let bubblegum = new Toy('bubblegum');
-let chair = new Toy('chair');
-let cthulhu = new Toy('cthulhu');
-let dogDuck = new Toy('dogDuck');
-let dragon = new Toy('dragon');
-let pen = new Toy('pen');
-let scissors = new Toy('scissors');
-let shark = new Toy('shark');
-let sweep = new Toy('sweep');
-let tauntaun = new Toy('tauntaun');
-let unicorn = new Toy('unicorn');
-let waterCan = new Toy('waterCan');
-let wineGlass = new Toy('wineGlass');
+let bag = new Product('bag');
+let banana = new Product('banana');
+let bathroom = new Product('bathroom');
+let boots = new Product('boots');
+let breakfast = new Product('breakfast');
+let bubblegum = new Product('bubblegum');
+let chair = new Product('chair');
+let cthulhu = new Product('cthulhu');
+let dogDuck = new Product('dog-duck');
+let dragon = new Product('dragon');
+let pen = new Product('pen');
+let scissors = new Product('scissors');
+let shark = new Product('shark');
+let sweep = new Product('sweep', 'png');
+let tauntaun = new Product('tauntaun');
+let unicorn = new Product('unicorn');
+let waterCan = new Product('water-Can');
+let wineGlass = new Product('wine-glass');
 
-let allToys = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass];
+let allProducts = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass];
 
-function selectRandomToy() {
-  return Math.floor(Math.random() * allToys.length);
+function selectRandomProduct() {
+  return Math.floor(Math.random() * allProducts.length);
 }
 
-function renderToys() {
-  let toy1 = selectRandomToy();
-  let toy2 = selectRandomToy();
-  let toy3 = selectRandomToy();
-  console.log(toy1, toy2, toy3)
-}
+function renderProducts() {
+  let product1 = selectRandomProduct();
+  let product2 = selectRandomProduct();
+  let product3 = selectRandomProduct();
+  console.log(product1, product2, product3)
+  /*}
+  
+  function renderProducts(){
+    let ranNum = selectRandomProduct();
+  }
+  /*console.log(indexArray);
+  
+  /*if (!indexArray.includes(ranNum);
+  indexArray.push(ranNum);*/
 
-while (toy1 === toy2) {
-  toy2 = selectRandomToy();
-  console.log(toy1, toy2);
-}
-while (toy2 === toy3) {
-  toy3 = selectRandomToy();
-  console.log(toy2, toy3);
-}
-while (toy1 === toy3) {
-  toy1 = selectRandomToy();
-  console.log(toy1, toy3)
-}
+  while (product1 === product2) {
+    product2 = selectRandomProduct();
+    console.log(product1, product2);
+  }
+  while (product2 === product3) {
+    product3 = selectRandomProduct();
+    console.log(product2, product3);
+  }
+  while (product1 === product3) {
+    product1 = selectRandomProduct();
+    console.log(product1, product3)
+  }
 
-image1.src = allToys[toy1].src;
-image1.alt = allToys[toy1].name;
-allToys[toy1].views++;
+  image1.src = allProducts[product1].src;
+  image1.alt = allProducts[product1].name;
+  allProducts[product1].views++;
 
-image2.src = allToys[toy2].src;
-image2.alt = allToys[toy2].name;
-allToys[toy2].views++;
+  image2.src = allProducts[product2].src;
+  image2.alt = allProducts[product2].name;
+  allProducts[product2].views++;
 
-image3.src = allToys[toy3].src;
-image3.alt = allToys[toy3].name;
-allToys[toy3].views++;
+  image3.src = allProducts[product3].src;
+  image3.alt = allProducts[product3].name;
+  allProducts[product3].views++;
+}
 
 function renderResults() {
-  for (let i=0; i < allToys.length; i++){
-    let li=document.createElement('li');
-    li.textContent = `${allToys[i].name} had ${allToys[i].views} and ${allToys[i].score} votes`;
+  for (let i = 0; i < allProducts.length; i++) {
+    let li = document.createElement('li');
+    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} and ${allProducts[i].score} votes`;
     results.appendChild(li);
   }
 }
@@ -94,10 +104,10 @@ function handleClick(event) {
   howManyTimesUserHasVoted++;
   let clickedToy = event.target.alt;
 
-  for (let i = 0; i < allToys.length; i++){
-    if (event.target.alt === allToys[i].name) {
-      console.log(allToys[i]);
-      allToys[i].score++;
+  for (let i = 0; i < allToys.length; i++) {
+    if (event.target.alt === allProducts[i].name) {
+      console.log(allProducts[i]);
+      allProducts[i].score++;
       break;
     }
   }
@@ -106,10 +116,10 @@ function handleClick(event) {
     resultBtn.className = 'clicks-allowed';
     resultBtn.addEventListener('click', renderResults)
   } else {
-    renderToys();
+    renderProducts();
   }
 }
 
 myContainer.addEventListener('click', handleClick);
 
-renderToys();
+renderProducts();
