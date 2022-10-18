@@ -1,3 +1,9 @@
+body {
+  font-family: monospace, 'Times New Roman', Times, serif;
+  background-color: aqua;
+  color:aquamarine
+}
+
 .container{
 border: 1px solid black;
 display: grid;
