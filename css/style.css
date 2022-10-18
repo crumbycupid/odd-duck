@@ -4,15 +4,52 @@ body {
   color:aquamarine
 }
 
-.container{
-border: 1px solid black;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-grid-template-rows: 1fr 1fr 1fr 1fr;
+.header {
+  grid-area: header;
 }
 
-.container div {
-  background-color: aliceblue;
-  margin: .5rem;
-  border: 1px solid black;
+.score {
+  grid-area: score;
+}
+
+.image-a {
+  grid-area: image-a;
+}
+
+.image-b {
+  grid-area: image-b;
+}
+
+.image-c {
+  grid-area: image-c;
+}
+
+.about {
+  grid-area: about;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+h1 {
+  font-size: 5rem;
+  color:aquamarine;
+  line-height: .8;
+  margin: 3rem 0 1rem;
+}
+
+main {
+  width: 1000px;
+  margin: 3rem auto;
+  display:grid;
+}
+
+#siteLogo {
+  width: 150px;
+  z-index: 1;
+}
+
+section {
+  background-color: rgba(rgba(61, 150, 191, 0.679), rgb(13, 117, 13), blue, alpha);
 }
