@@ -4,7 +4,7 @@
 console.log('hello')
 
 let myContainer = document.querySelector('section');
-let resultBtn = document.querySelector('section + div');
+let resultBtn = document.getElementById('resultsButton');
 let results = document.querySelector('ul');
 
 let image1 = document.querySelector('section img:first-child')
@@ -104,14 +104,14 @@ function handleClick(event) {
   howManyTimesUserHasVoted++;
   let clickedToy = event.target.alt;
 
-  for (let i = 0; i < allToys.length; i++) {
+  for (let i = 0; i < allProducts.length; i++) {
     if (event.target.alt === allProducts[i].name) {
       console.log(allProducts[i]);
       allProducts[i].score++;
       break;
     }
   }
-  if (howManyTimesUserHasVoted === maxNumberofVote) {
+  if (howManyTimesUserHasVoted === maxNumberofVotes) {
     myContainer.removeEventListener('click', handleClick);
     resultBtn.className = 'clicks-allowed';
     resultBtn.addEventListener('click', renderResults)
