@@ -91,7 +91,7 @@ function renderProducts() {
 function renderResults() {
   for (let i = 0; i < allProducts.length; i++) {
     let li = document.createElement('li');
-    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} and ${allProducts[i].score} votes`;
+    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and ${allProducts[i].score} votes`;
     results.appendChild(li);
   }
 }
