@@ -4,7 +4,7 @@ console.log('hello')
 
 let myContainer = document.querySelector('section');
 let resultBtn = document.getElementById('resultsButton');
-let results = document.querySelector('ul');
+//let results = document.querySelector('ul');
 
 let image1 = document.querySelector('section img:first-child')
 let image2 = document.querySelector('section img:nth-child(2)');
@@ -36,6 +36,7 @@ let cthulhu = new Product('cthulhu');
 let dogDuck = new Product('dog-duck');
 let dragon = new Product('dragon');
 let pen = new Product('pen');
+let petsweep = new Product('pet-sweep')
 let scissors = new Product('scissors');
 let shark = new Product('shark');
 let sweep = new Product('sweep', 'png');
@@ -60,7 +61,7 @@ let indexArray = [];
 
 function renderProducts() {
 
-  while (indexArray.length < 6) {
+  while (indexArray.length < 7) {
     let ranNum = selectRandomProduct();
     if (!indexArray.includes(ranNum)) {
       indexArray.push(ranNum);
@@ -70,75 +71,153 @@ function renderProducts() {
   let product1 = indexArray.shift();
   let product2 = indexArray.shift();
   let product3 = indexArray.shift();
- 
-//old while loop
-while (product1 === product2) {
-  product2 = selectRandomProduct();
-  console.log(product1, product2);
-}
-while (product2 === product3) {
-  product3 = selectRandomProduct();
-  console.log(product2, product3);
-}
-while (product1 === product3) {
-  product1 = selectRandomProduct();
-  console.log(product1, product3)
-}
 
-image1.src = allProducts[product1].src;
-image1.alt = allProducts[product1].name;
-allProducts[product1].views++;
+  //old while loop
+  /*while (product1 === product2) {
+    product2 = selectRandomProduct();
+    console.log(product1, product2);
+  }
+  while (product2 === product3) {
+    product3 = selectRandomProduct();
+    console.log(product2, product3);
+  }
+  while (product1 === product3) {
+    product1 = selectRandomProduct();
+    console.log(product1, product3)
+  }
+  */
+  image1.src = allProducts[product1].src;
+  image1.alt = allProducts[product1].name;
+  allProducts[product1].views++;
 
-image2.src = allProducts[product2].src;
-image2.alt = allProducts[product2].name;
-allProducts[product2].views++;
+  image2.src = allProducts[product2].src;
+  image2.alt = allProducts[product2].name;
+  allProducts[product2].views++;
 
-image3.src = allProducts[product3].src;
-image3.alt = allProducts[product3].name;
-allProducts[product3].views++;
+  image3.src = allProducts[product3].src;
+  image3.alt = allProducts[product3].name;
+  allProducts[product3].views++;
 }
 
 function renderResults() {
-for (let i = 0; i < allProducts.length; i++) {
-  let views = 'views';
-  if (allProducts[i].views ===1){
-    views = 'view';
-  }
-  let li = document.createElement('li');
-  li.textContent = `${allProducts[i].name} had ${allProducts[i].views} ${views}, and ${allProducts[i].score} votes`;
-  results.appendChild(li);
-}
+  /*for (let i = 0; i < allProducts.length; i++) {
+    let views = 'views';
+    if (allProducts[i].views === 1) {
+      views = 'view';
+    }
+    let li = document.createElement('li');
+    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} ${views}, and ${allProducts[i].score} votes`;
+    results.appendChild(li);
+  }*/
 }
 
 function handleClick(event) {
-if (event.target === myContainer) {
-  alert('Please click an image')
-}
-console.log(event.target.alt);
-howManyTimesUserHasVoted++;
-let clickedProduct = event.target.alt;
+  if (event.target === myContainer) {
+    alert('Please click an image')
+  }
+  console.log(event.target.alt);
+  howManyTimesUserHasVoted++;
+  let clickedProduct = event.target.alt;
 
-for (let i = 0; i < allProducts.length; i++) {
-  if (clickedProduct === allProducts[i].name) {
-    console.log(allProducts[i]);
-    allProducts[i].score++;
-    break;
+  for (let i = 0; i < allProducts.length; i++) {
+    if (clickedProduct === allProducts[i].name) {
+      console.log(allProducts[i]);
+      allProducts[i].score++;
+      break;
+    }
+  }
+  if (howManyTimesUserHasVoted === maxNumberofVotes) {
+    myContainer.removeEventListener('click', handleClick);
+    resultBtn.className = 'clicks-allowed';
+    resultBtn.addEventListener('click', renderChart)
+  } else {
+    renderProducts();
   }
 }
-if (howManyTimesUserHasVoted === maxNumberofVotes) {
-  myContainer.removeEventListener('click', handleClick);
-  resultBtn.className = 'clicks-allowed';
-  resultBtn.addEventListener('click', renderResults)
-} else {
-  renderProducts();
-}
-}
 
+//const labels = ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum', 'Chair', 'Cthulhu', 'DogDuck', 'Dragon', 'Pen', 'Petsweep', 'Scissors', 'Shark', 'Sweep', 'Tauntaun', 'Unicorn', 'WaterCan', 'WineGlass'];
+
+function renderChart() {
+
+  let products = [];
+  let productViews = [];
+  let productScore = [];
+  for (let i = 0; i < allProducts.length; i++) {
+    products.push(allProducts[i].name);
+    productViews.push(allProducts[i].viesws);
+    productScore.push(allProducts[i].score);
+  }
+  //console.log(products);
+
+  const data = {
+    labels: products,
+    datasets: [
+      {
+        label: 'Views',
+        data: productViews,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      },
+      {
+        label: 'Votes',
+        data: productScore,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      },
+    ]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+}
 myContainer.addEventListener('click', handleClick);
 
 renderProducts();
-
-
-function rederChart(){
-
-}
