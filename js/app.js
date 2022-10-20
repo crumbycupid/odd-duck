@@ -14,12 +14,16 @@ let image3 = document.querySelector('section img:nth-child(3)');
 let howManyTimesUserHasVoted = 0
 let maxNumberofVotes = 25;
 
+let allProduct = [];
+console.log(image3.src);
+
 function Product(name, fileExtension = 'jpeg') {
   this.name = name;
   this.fileExtension = fileExtension;
   this.src = `images/${this.name}.${this.fileExtension}`;
   this.score = 0;
   this.views = 0;
+  allProducts.push(this);
 }
 
 let bag = new Product('bag');
@@ -38,7 +42,7 @@ let shark = new Product('shark');
 let sweep = new Product('sweep', 'png');
 let tauntaun = new Product('tauntaun');
 let unicorn = new Product('unicorn');
-let waterCan = new Product('water-Can');
+let waterCan = new Product('water-can');
 let wineGlass = new Product('wine-glass');
 
 let allProducts = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass];
@@ -48,9 +52,9 @@ function selectRandomProduct() {
 }
 
 function renderProducts() {
-  let product1 = selectRandomProduct();
-  let product2 = selectRandomProduct();
-  let product3 = selectRandomProduct();
+  let product1 = selectRandomProduct(); 3
+  let product2 = selectRandomProduct(); 6 
+  let product3 = selectRandomProduct(); 3
   console.log(product1, product2, product3)
   /*}
   
@@ -102,10 +106,10 @@ function handleClick(event) {
   }
   console.log(event.target.alt);
   howManyTimesUserHasVoted++;
-  let clickedToy = event.target.alt;
+  let clickedProduct = event.target.alt;
 
   for (let i = 0; i < allProducts.length; i++) {
-    if (event.target.alt === allProducts[i].name) {
+    if (clickedProduct === allProducts[i].name) {
       console.log(allProducts[i]);
       allProducts[i].score++;
       break;
@@ -123,3 +127,8 @@ function handleClick(event) {
 myContainer.addEventListener('click', handleClick);
 
 renderProducts();
+
+
+function rederChart(){
+
+}
