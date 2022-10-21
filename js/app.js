@@ -144,10 +144,11 @@ function renderChart() {
   let productScore = [];
   for (let i = 0; i < allProducts.length; i++) {
     products.push(allProducts[i].name);
-    productViews.push(allProducts[i].viesws);
+    productViews.push(allProducts[i].views);
     productScore.push(allProducts[i].score);
   }
-  //console.log(products);
+  console.log(products);
+  
 
   const data = {
     labels: products,
