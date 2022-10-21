@@ -25,26 +25,6 @@ function Product(name, fileExtension = 'jpeg') {
   allProducts.push(this);
 }
 
-let bag = new Product('bag');
-let banana = new Product('banana');
-let bathroom = new Product('bathroom');
-let boots = new Product('boots');
-let breakfast = new Product('breakfast');
-let bubblegum = new Product('bubblegum');
-let chair = new Product('chair');
-let cthulhu = new Product('cthulhu');
-let dogDuck = new Product('dog-duck');
-let dragon = new Product('dragon');
-let pen = new Product('pen');
-let petsweep = new Product('pet-sweep')
-let scissors = new Product('scissors');
-let shark = new Product('shark');
-let sweep = new Product('sweep', 'png');
-let tauntaun = new Product('tauntaun');
-let unicorn = new Product('unicorn');
-let waterCan = new Product('water-can');
-let wineGlass = new Product('wine-glass');
-
 function selectRandomProduct() {
   return Math.floor(Math.random() * allProducts.length);
 }
@@ -111,6 +91,41 @@ function renderResults() {
   }*/
 }
 
+function storeData() {
+  let string = JSON.stringify(allProducts);
+  localStorage.setItem('data', string);
+  console.log(string);
+}
+
+function getData() {
+  let localData = localStorage.getItem('data');
+  if (localData) {
+    let parsedOrders = JSON.parse(localData)
+    console.log(parsedOrders);
+    allProducts = parsedOrders;
+  } else {
+    let bag = new Product('bag');
+    let banana = new Product('banana');
+    let bathroom = new Product('bathroom');
+    let boots = new Product('boots');
+    let breakfast = new Product('breakfast');
+    let bubblegum = new Product('bubblegum');
+    let chair = new Product('chair');
+    let cthulhu = new Product('cthulhu');
+    let dogDuck = new Product('dog-duck');
+    let dragon = new Product('dragon');
+    let pen = new Product('pen');
+    let petsweep = new Product('pet-sweep')
+    let scissors = new Product('scissors');
+    let shark = new Product('shark');
+    let sweep = new Product('sweep', 'png');
+    let tauntaun = new Product('tauntaun');
+    let unicorn = new Product('unicorn');
+    let waterCan = new Product('water-can');
+    let wineGlass = new Product('wine-glass');
+  }
+}
+
 function handleClick(event) {
   if (event.target === myContainer) {
     alert('Please click an image')
@@ -134,9 +149,6 @@ function handleClick(event) {
     renderProducts();
   }
 }
-
-//const labels = ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum', 'Chair', 'Cthulhu', 'DogDuck', 'Dragon', 'Pen', 'Petsweep', 'Scissors', 'Shark', 'Sweep', 'Tauntaun', 'Unicorn', 'WaterCan', 'WineGlass'];
-
 function renderChart() {
 
   let products = [];
@@ -147,8 +159,8 @@ function renderChart() {
     productViews.push(allProducts[i].views);
     productScore.push(allProducts[i].score);
   }
-  console.log(products);
-  
+  storeData();
+
 
   const data = {
     labels: products,
@@ -221,4 +233,5 @@ function renderChart() {
 }
 myContainer.addEventListener('click', handleClick);
 
+getData();
 renderProducts();
